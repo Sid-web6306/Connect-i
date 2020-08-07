@@ -14,7 +14,9 @@ router.get('/',homeController.home);
 router.use('/users',require('./users'));
 //for any futher routes,access from here
 // router.use('/routerName', require('/routerFile'));
-
+router.use('/posts',require('./post'),(req,res)=>{
+	res.send('<h1>Users Posts</h1>');
+});
 
 
 module.exports = router;
