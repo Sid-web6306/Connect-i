@@ -4,8 +4,13 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const port = 8080;
 
+//looking static files    path name
+app.use(express.static('./assets'));
 
 app.use(expressLayouts);
+//extract style and scripts from sub pages into the layout
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 //use express router
 ////////URL,/////Path for routes
 app.use('/',require('./routes'));
