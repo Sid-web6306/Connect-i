@@ -7,6 +7,12 @@ const port = 8080;
 ////////URL,/////Path for routes
 app.use('/',require('./routes'));
 
+//setup view engine
+app.set('view engine', 'ejs');
+app.set('views','./views');
+
+
+
 //Server is running on port.
 app.listen(port,(err)=>{
 	if(err){
