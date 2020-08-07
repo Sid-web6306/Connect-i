@@ -5,7 +5,7 @@ const port = 8080;
 
 //use express router
 ////////URL,/////Path for routes
-app.use('/',require('./routes/index.js'));
+app.use('/',require('./routes'));
 
 //Server is running on port.
 app.listen(port,(err)=>{
