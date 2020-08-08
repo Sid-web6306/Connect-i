@@ -1,5 +1,5 @@
 <h3>User Sign-Up</h3>
-<form>
+<form action="/users/create" method="POST">
 	<label>
 		Name: 
 	</label>
@@ -11,6 +11,11 @@
 	<label>
 		Password:
 	</label>
-	<input type="text" name="password" placeholder="Enter Your Password" required><br><br>
-	<input type="submit" name="signup" value="Sign-Up">
+	<input type="password" name="password" placeholder="Enter Your Password" required><br><br>
+	<label>
+		Confirm Password:
+	</label>
+	<input type="password" name="confirm_password" placeholder="Confirm Your Password" required><br><br>
+
+	<input type="submit"  value="Sign-Up">
 </form>
