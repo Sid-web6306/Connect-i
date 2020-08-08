@@ -6,4 +6,8 @@
 	<!-- <%-include('_footer')%> -->
 	<p>Name : <%=user.name%></p>
 	<p>Email : <%=user.email%></p>
+	<form action="/users/remove-cookie" method="POST">
+		<input type="submit" value="Sign Out">
+	</form>
+	
 
