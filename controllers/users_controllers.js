@@ -47,8 +47,4 @@ module.exports.create = (req,res)=>{
 //signin and create the session for user
 module.exports.createSession = (req,res)=>{
 	//Todo Later
-	if(!user){
-		return res.redirect('/users/sign-up');
-	}
-	
 }
