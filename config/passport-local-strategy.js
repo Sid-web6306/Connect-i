@@ -1,14 +1,16 @@
+//require passport
 const passport = require('passport');
-
+//require LocalStrategy
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user.js');
 
 //authentication using passport
-passport.use(new LocalStrategy(()=>{
+passport.use(new LocalStrategy({
 	usernameField: 'email'
-	},(email,password,done)=>{
-		//find a user and create identity
-		User.findOne({email:email}, (err,user)=>{
+	},function(email,password,done){
+		//find a user and establiished the identity
+				//property:valuelbj
+	User.findOne({email:email}, function(err,user){
 			if(err){
 				console.log("error in signin for a user-->passport");
 				return done(err);
@@ -17,22 +19,22 @@ passport.use(new LocalStrategy(()=>{
 				console.log('invalid username/password');
 				return done(null,false);
 			}
-
+			console.log(user);
 			return done(null,user);
-		})
+		});
 	}
 
 ));
 
 //serializing a user to decide which key is to be kept in the cookie
-paasport.serializeUser((user,done)=>{
+passport.serializeUser(function(user,done){
 	done(null,user.id);
-})
+});
 
 
 //deserialize the user from the key in the cookie
-passport.deserializeUser((id,done)=>{
-	User.findById(id,(err,user)=>{
+passport.deserializeUser(function(id,done){
+	User.findById(id,function(err,user){
 		if(err){
 			console.log('Error in finding user --> passport');
 			return done(err);
