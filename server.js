@@ -15,9 +15,9 @@ const sassMiddleware = require('node-sass-middleware');
 
 app.use(sassMiddleware({
 	//source
-	src:'/assets/scss',
+	src:'./assets/scss',
 	//destination
-	dest:'/assets/css',
+	dest:'./assets/css',
 	//debugging
 	debug: true,
 	//Output style : all in one line or multiple line
