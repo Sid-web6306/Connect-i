@@ -1,18 +1,18 @@
 
 <header>
-	Page Header
+	<h2 class="logo"><a href="/">Connect-I</a></h2>
 	<ul>
 		<% if(locals.user){%>
 			<li><a href="/users/profile"><%=user.name%></a></li>
 			<li>
-				<a href="/users/sign-out">Sign Out</a>
+				<a href="/users/sign-out">SignOut</a>
 			</li>
 		<%}else{%>
 			<li>
-				<a href="/users/sign-up">Sign Up</a>
+				<a href="/users/sign-up">SignUp</a>
 			</li>
 			<li>
-				<a href="/users/sign-in">Sign In</a>
+				<a href="/users/sign-in">SignIn</a>
 			</li>
 
 		<%}%>

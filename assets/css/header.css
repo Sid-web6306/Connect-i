@@ -1,0 +1,22 @@
+header {
+  background-color: blue;
+  display: flex;
+  justify-content: space-between;
+  max-height: 50px;
+  padding: 10px; }
+
+.logo {
+  color: white;
+  margin: auto 5px; }
+
+ul {
+  list-style: none; }
+
+li {
+  display: inline;
+  margin-right: 5px; }
+
+a {
+  color: white;
+  text-decoration: none;
+  text-transform: capitalize; }
