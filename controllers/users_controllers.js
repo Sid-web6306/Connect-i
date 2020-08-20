@@ -8,12 +8,23 @@ module.exports.profile = (req,res)=>{
 }
 //render signup page
 module.exports.signup = (req,res)=>{
+	//if user is logged in
+	if(req.isAuthenticated()){
+		return res.redirect('/users/profile');
+	}
+
+
+
 	return res.render('user_signup',{
 		title:"Connect-i | Signup"
 	})
 }
 //render signin page
 module.exports.signin = (req,res)=>{
+	//if user is logged in
+	if(req.isAuthenticated()){
+		return res.redirect('/users/profile');
+	}
 	return res.render('user_signin',{
 		title:"Connect-i | Signin"
 	})
@@ -47,4 +58,11 @@ module.exports.create = (req,res)=>{
 //signin and create the session for user
 module.exports.createSession = (req,res)=>{
 	return res.redirect('/');
+}
+
+
+module.exports.deleteSession = (req,res)=>{
+	res.clearCookie('Connect-i');
+	 // req.logout();
+	return res.redirect('/users/sign-in');
 }
