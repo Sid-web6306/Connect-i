@@ -4,7 +4,7 @@ const postSchema = new mongoose.Schema({
 	content:{
 		type:string,
 		required: true,
-	}
+	},
 	//refer to user schema
 	user:{
 		type:mongoose.Schema.Types.ObjectId,
