@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
 	content:{
-		type:string,
+		type:String,
 		required: true,
 	},
 	//refer to user schema
