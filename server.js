@@ -48,7 +48,7 @@ app.set('layout extractScripts', true);
 app.set('view engine', 'ejs');
 app.set('views','./views');
 
-//mongo store is used6 to store in mongodb
+//mongo store is used to store in mongodb
 app.use(session({
 	name:'Connect-i',
 	//todo change the secret before deployment in production mode
@@ -73,6 +73,8 @@ app.use(session({
 
 }));
 
+
+//Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
 
