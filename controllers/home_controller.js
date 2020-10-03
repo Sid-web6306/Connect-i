@@ -12,7 +12,16 @@ module.exports.home = (req,res) =>{
 	// 	})
 	// })
 	//populate the whole user of each post
-	Post.find({}).populate('user').exec((err,posts)=>{
+	//nested populate 
+	Post.find({})
+	.populate('user')
+	.populate({
+		path:'comments',
+		populate:{
+			path:'user'
+		}
+	})
+	.exec((err,posts)=>{
 		return res.render('home',{
 			title:"Connect-i | Home",
 			post:posts

@@ -7,7 +7,7 @@ const commentScehma = new mongoose.Schema({
     },
     // comment belongs to an user
     user:{
-        tyoe:mongoose.Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
     //For each post no. of comments
