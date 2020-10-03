@@ -25,3 +25,9 @@ module.exports.create = (req,res)=>{
         }
     });
 }
+
+
+
+module.exports.destroy = (req,res)=>{
+    
+}
