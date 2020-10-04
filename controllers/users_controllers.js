@@ -1,26 +1,33 @@
 const User = require('../models/user.js');
 
 //render user-profile
-module.exports.profile = (req,res)=>{
-
-	User.findById(req.params.id ,(err,user)=>{
-		return res.render('user_profile',{
-			title:"Connect-I | User Profile",
-			profile_user:user
-		});
-	});
-
+module.exports.profile = async (req,res)=>{
+	try{
+		let user = await User.findById(req.params.id );
+			return res.render('user_profile',{
+				title:"Connect-I | User Profile",
+				profile_user:user
+			});	
+	}catch(err){
+		console.log("Error in user_controller/profile: ",err);
+		return;
+	}
 	
 }
 
-module.exports.update = (req,res)=>{
-	if(req.user.id===req.params.id){
-		User.findByIdAndUpdate(req.params.id, req.body,(err,user)=>{
+module.exports.update = async (req,res)=>{
+	try{
+		if(req.user.id===req.params.id){
+			let user = await User.findByIdAndUpdate(req.params.id, req.body);
 			return res.redirect('back');
-		})
-	}else{
-		res.status(401).send('Umauthorized')
+		}else{
+			res.status(401).send('Umauthorized')
+		}
+	}catch(err){
+		console.log("Error in user_controller/update");
+		return;
 	}
+	
 }
 //render signup page
 module.exports.signup = (req,res)=>{
@@ -28,9 +35,6 @@ module.exports.signup = (req,res)=>{
 	if(req.isAuthenticated()){
 		return res.redirect('/users/profile');
 	}
-
-
-
 	return res.render('user_signup',{
 		title:"Connect-i | Signup"
 	})
@@ -46,30 +50,29 @@ module.exports.signin = (req,res)=>{
 	})
 }
 //get the sign up data
-module.exports.create = (req,res)=>{
-	if (req.body.password!=req.body.confirm_password) {
-		console.log("Password didn't match");
-		return res.redirect('back');
-	}
+module.exports.create = async (req,res)=>{
 
-	User.findOne({email: req.body.email},(err,user)=>{
-		if(err){
-			console.log('error in finding user in signup',err);
-			return;
+	try{
+		if (req.body.password!=req.body.confirm_password) {
+			console.log("Password didn't match");
+			return res.redirect('back');
 		}
+	
+		let user = await letUser.findOne({email: req.body.email})
 		if(!user){
-			User.create(req.body,(err,user)=>{
-				if(err){
-					console.log('error in finding user in signup');
-					return;
-				}
-				return res.redirect('/users/sign-in');
-			});
+			let user = await User.create(req.body);
+			return res.redirect('/users/sign-in');
 		}else{
 			return res.redirect('back');
 		}
-	});
+	}catch(err){
+		console.log("Error in user_controller/create: ",err);
+		return;
+	}
 
+
+
+	
 }
 //signin and create the session for user
 module.exports.createSession = (req,res)=>{
