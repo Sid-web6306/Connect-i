@@ -15,10 +15,12 @@ module.exports.create = async (req,res)=>{
                 post.comments.push(comment);
                 //saving permanently into database
                 post.save();
+                req.flash('success','Comment Published!');
                 res.redirect('/');
         }
     }catch(err){
         console.log("Error in comment-controller/create");
+        req.flash('error',err);
         return;
     }
     
@@ -33,11 +35,13 @@ module.exports.destroy = async(req,res)=>{
             let PostId = comment.post;
             comment.remove();
             let post = await Post.findByIdAndUpdate(PostId,{$pull:{comments: req.param.id}});
+            req.flash('success','Comment Deleted Successfully!');
             return res.redirect('/');
         }
 
     }catch(err){
         console.log("Error in comment_controller/destroy: ",err);
+        req.flash('error',err);
         return;
     }
     

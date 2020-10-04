@@ -76,12 +76,16 @@ module.exports.create = async (req,res)=>{
 }
 //signin and create the session for user
 module.exports.createSession = (req,res)=>{
+	req.flash('success', 'Logged In Successfully');
 	return res.redirect('/');
 }
 
 
 module.exports.deleteSession = (req,res)=>{
-	res.clearCookie('Connect-i');
-	 // req.logout();
+	req.flash('success', 'You have Logged Out');
+	
+	// res.clearCookie('Connect-i');
+	
+	 req.logout();
 	return res.redirect('/users/sign-in');
 }
