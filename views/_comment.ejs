@@ -1,0 +1,13 @@
+<li>
+    <p style="font-size: medium; color: blue;">
+        <% if (locals.user && (comment.user.id === locals.user.id)) { %>
+            <small>
+                <a style= "color:black; border:1px solid black;margin-right: 10px;" href="/comments/destroy/<%= comment._id %> ">X</a>
+            </small>
+        <% } %>
+        <%= comment.content %>
+        <small style="padding: 0 4px; font-size: 9px;border-bottom: 1px solid black;">
+            <%= comment.user.name %> 
+        </small> 
+    </p>
+</li>

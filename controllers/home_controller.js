@@ -1,4 +1,6 @@
+const User = require('../models/user');
 const Post = require('../models/post');
+
 module.exports.home = (req,res) =>{
 	//print the cookie
 	console.log(req.cookies);
@@ -22,10 +24,16 @@ module.exports.home = (req,res) =>{
 		}
 	})
 	.exec((err,posts)=>{
-		return res.render('home',{
-			title:"Connect-i | Home",
-			post:posts
-		})
+		User.find({},(err,users)=>{
+			return res.render('home',{
+				title:"Connect-i | Home",
+				post:posts,
+				all_users:users
+			})
+		});
+
+
+		
 	})
 }
 

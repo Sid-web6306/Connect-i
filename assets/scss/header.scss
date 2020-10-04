@@ -9,6 +9,7 @@ header{
 	color:white; 
 	margin: auto 5px;
 }
+
 ul{
 	list-style: none;
 	
@@ -18,7 +19,7 @@ li{
 	display: inline;
 	margin-right: 5px;
 }
-a{
+li > a , .logo > a{
 	color: white;
 	text-decoration: none;
 	text-transform: capitalize;
