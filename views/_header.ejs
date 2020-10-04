@@ -3,7 +3,7 @@
 	<h2 class="logo"><a href="/">Connect-I</a></h2>
 	<ul>
 		<% if(locals.user){%>
-			<li><a href="/users/profile"><%=user.name%></a></li>
+			<li><a href="/users/profile/<%= user.id %>""> <%=user.name%></a></li>
 			<li>
 				<a href="/users/sign-out">SignOut</a>
 			</li>

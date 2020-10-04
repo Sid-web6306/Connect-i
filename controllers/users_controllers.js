@@ -12,6 +12,16 @@ module.exports.profile = (req,res)=>{
 
 	
 }
+
+module.exports.update = (req,res)=>{
+	if(req.user.id===req.params.id){
+		User.findByIdAndUpdate(req.params.id, req.body,(err,user)=>{
+			return res.redirect('back');
+		})
+	}else{
+		res.status(401).send('Umauthorized')
+	}
+}
 //render signup page
 module.exports.signup = (req,res)=>{
 	//if user is logged in
