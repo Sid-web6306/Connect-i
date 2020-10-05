@@ -55,17 +55,21 @@ module.exports.create = async (req,res)=>{
 	try{
 		if (req.body.password!=req.body.confirm_password) {
 			console.log("Password didn't match");
+			req.flash('error','Password didnt match');
 			return res.redirect('back');
 		}
 	
-		let user = await letUser.findOne({email: req.body.email})
+		let user = await User.findOne({email: req.body.email})
 		if(!user){
 			let user = await User.create(req.body);
+			req.flash('success','User SignUp Successfully');
 			return res.redirect('/users/sign-in');
 		}else{
+			req.flash('error','Email Id Already Exist');
 			return res.redirect('back');
 		}
 	}catch(err){
+		req.flash('error',err);
 		console.log("Error in user_controller/create: ",err);
 		return;
 	}
