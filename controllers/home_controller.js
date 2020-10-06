@@ -5,6 +5,7 @@ module.exports.home = async (req,res) =>{
 	//set the cookie
 	try{
 		let posts = await Post.find({})
+		.sort('-createdAt')
 	.populate('user')
 	.populate({
 		path:'comments',
