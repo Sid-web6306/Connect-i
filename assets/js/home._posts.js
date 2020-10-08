@@ -15,6 +15,7 @@ console.log("heelo");
                 success: (data)=>{
                     let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
+                    deletePost($('.delete-post-button' , newPost));
                 },
                 error:(error)=>{
                     console.log('Error in sending a post mannually: ',error.responseText);
@@ -30,7 +31,7 @@ console.log("heelo");
                 <p style="font-weight: bolder;font-size: 18px; margin-right:10em;">
 
                         <small>
-                            <a class="delete-post-button" style= "color:black; border:1px solid black;margin-right: 10px;;" href="/posts/destroy/<%= post._id %> ">X</a>
+                            <a class="delete-post-button" style= "color:black; border:1px solid black;margin-right: 10px;;" href="/posts/destroy/${post._id} ">X</a>
                         </small>
                     
                     ${post.content} 
@@ -61,7 +62,21 @@ console.log("heelo");
     }
 
     //Method to delete a post
-    
+    let deletePost = (deleteLink)=>{
+        $(deleteLink).click((e)=>{
+            e.preventDefault();
+            $.ajax({
+                type:'get',
+                url:$(deleteLink).prop('href'),
+                data:newPostForm.serialize(),
+                success:(data)=>{
+                    $(`#post-$(data.data.post_id)`).remove();
+                },error:(error)=>{
+                    console.log("Error in deleting a pot in ajax: ",error.responseText);
+                }
+            })
+        })
+    }
 
     createPost();
 }
