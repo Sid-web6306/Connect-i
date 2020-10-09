@@ -19,6 +19,22 @@ module.exports.update = async (req,res)=>{
 	try{
 		if(req.user.id===req.params.id){
 			let user = await User.findByIdAndUpdate(req.params.id, req.body);
+			User.uploadedAvatar(req,res,(err)=>{
+				if(err){
+					console.log("Error in uploading a avatar in user",err);
+				}
+				user.name = req.body.name;
+				user.email = req.body.email;
+				console.log(req.file);
+				if(req.file){
+					//this is saving the path of the uploaded file into avatar field in the user
+					user.avatar = User.avatarPath + '/' + req.file.fieldname;
+				}
+				user.save();
+				return res.redirect(200,'back');
+				
+				
+			});
 			return res.redirect('back');
 		}else{
 			res.status(401).send('Umauthorized')

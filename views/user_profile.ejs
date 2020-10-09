@@ -10,11 +10,12 @@
 
 	<% if (user.id == profile_user.id) { %>
 		<!-- If user matches show the form -->
-		<form action="/users/update/<%= profile_user._id %>" method="POST">
+		<form action="/users/update/<%= profile_user._id %>" enctype="multipart/form-data" method="POST">
 			<label>Name: </label>
 			<input type="text" name="name" Placeholder="your name" value="<%= profile_user.name %> " required/><br/><br>
 			<label>Email: </label>
 			<input type="email" name="email" Placeholder="your email" value="<%= profile_user.email %> " required/><br/><br>
+			<input type="file" name= "avatar" placeholder="profile picture" />
 			<input type="submit" value="UPDATE" />
 
 		</form>
