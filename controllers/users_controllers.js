@@ -14,11 +14,14 @@ module.exports.profile = async (req,res)=>{
 	}
 	
 }
+//please reproduce the error ok
 
 module.exports.update = async (req,res)=>{
 	try{
 		if(req.user.id===req.params.id){
+			console.log(req.body.name)
 			let user = await User.findByIdAndUpdate(req.params.id, req.body);
+			console.log(req.params.id,user,req.body,req.file);
 			User.uploadedAvatar(req,res,(err)=>{
 				if(err){
 					console.log("Error in uploading a avatar in user",err);
@@ -31,11 +34,9 @@ module.exports.update = async (req,res)=>{
 					user.avatar = User.avatarPath + '/' + req.file.fieldname;
 				}
 				user.save();
-				return res.redirect(200,'back');
-				
+				return res.redirect('back');
 				
 			});
-			return res.redirect('back');
 		}else{
 			res.status(401).send('Umauthorized')
 		}
