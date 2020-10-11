@@ -19,7 +19,6 @@ module.exports.profile = async (req,res)=>{
 module.exports.update = async (req,res)=>{
 	try{
 		if(req.user.id===req.params.id){
-			console.log(req.body.name)
 			let user = await User.findByIdAndUpdate(req.params.id, req.body);
 			console.log(req.params.id,user,req.body,req.file);
 			User.uploadedAvatar(req,res,(err)=>{
@@ -28,21 +27,21 @@ module.exports.update = async (req,res)=>{
 				}
 				user.name = req.body.name;
 				user.email = req.body.email;
-				console.log(req.file);
 				if(req.file){
 					//this is saving the path of the uploaded file into avatar field in the user
 					user.avatar = User.avatarPath + '/' + req.file.fieldname;
 				}
 				user.save();
+				console.log(user.avatar);
 				return res.redirect('back');
 				
 			});
 		}else{
-			res.status(401).send('Umauthorized')
+			res.status(401).send('Unauthorized')
 		}
 	}catch(err){
 		console.log("Error in user_controller/update");
-		return;
+		return res.redirect('back');
 	}
 	
 }
