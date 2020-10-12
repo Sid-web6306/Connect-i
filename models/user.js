@@ -25,23 +25,26 @@ const userSchema = new mongoose.Schema({
 	timestamps:true
 });
 
-let storage = multer.diskStorage({
-	destination: (req,file,cb)=>{
-		//path -> models.js+'..'+ '/uploads/users/avatars'
-		cb(null,path.join(__dirname,'..',AVATAR_PATH));
-	},
-	//filename : name of the file
-	//file.fieldname: fieldname(avatar)
-	filename:(req,file,cb)=>{
-		cb(null,file.fieldname+ '-' + Date.now());
-	}
-});
-
-
-//static functions & methods
-userSchema.statics.uploadedAvatar = multer({storage: storage}).single('avatar')//.single means only one file uploaded i.e. avatar;  for multiple files ituses array of files;
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) { //cb -> callback
+        cb(null, path.join(__dirname, '..', AVATAR_PATH));
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+})
+//statics
+userSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
 userSchema.statics.avatarPath = AVATAR_PATH;
 
-const User = mongoose.model('User',userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+
+
+
+
+
+
+//img mein jo src hain woh galat aarha hai 
