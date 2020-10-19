@@ -24,7 +24,7 @@ module.exports.home = async (req,res) =>{
 			all_users:users
 		});
 	}catch(err){
-		console.log("Erroin home controller/home: ",err);
+		console.log("Error in home controller/home: ",err);
 		return;
 	}
 

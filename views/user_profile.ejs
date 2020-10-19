@@ -4,12 +4,11 @@
 	<!-- <%-include('_header')%> -->
 	<h1> Connect-i /<%=title%></h1>
 	<!-- <%-include('_footer')%> -->
-	<img src="<%= profile_user.avatar %> " alt="<%= user.name %> " width="100">
-
 
 
 	<% if (user.id == profile_user.id) { %>
 		<!-- If user matches show the form -->
+		<img src="<%= profile_user.avatar %> " alt="<%= user.name %> " width="100">
 		<form action="/users/update/<%= profile_user._id %>" enctype="multipart/form-data" method="POST">
 			<label>Name: </label>
 			<input type="text" name="name" Placeholder="your name" value="<%= profile_user.name %> " required/><br/><br>

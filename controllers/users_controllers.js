@@ -108,7 +108,7 @@ module.exports.createSession = (req,res)=>{
 
 
 module.exports.deleteSession = (req,res)=>{
-	req.flash('success', 'You have Logged Out');
+	req.flash('success', 'You have been Logged Out');
 	
 	// res.clearCookie('Connect-i');
 	
