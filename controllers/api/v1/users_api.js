@@ -4,15 +4,16 @@ const jwt = require('jsonwebtoken');
 
 
 module.exports.createSession = async(req,res)=>{
+
     try{
-        let user = User.findOne({email: req.body.email});
+        let user =await User.findOne({email: req.body.email});
 
         if(!user || user.password != req.body.password){
-            return res.json(422,{
+            return res.status(422).json({
                 message:"invalid username or password"
             });
         }
-        return res.json(200,{
+        return res.status(200).json({
             message:"Sign in successfuly , here is your token, Please keep it safe!",
             data:{
                 token: jwt.sign((await user).toJSON(), 'Connect-I', {expiresIn: '10000'})
@@ -20,7 +21,7 @@ module.exports.createSession = async(req,res)=>{
         })
     }catch(err){
         console.log("Error in user_api: ",err);
-        return res.json(500, {
+        return res.status(500).json({
             message:"internal server error"
         });
     }
