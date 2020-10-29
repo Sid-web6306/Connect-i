@@ -4,7 +4,7 @@ const likeScehma = new mongoose.Schema({
     user:{
         type: mongoose.Schema.ObjectId
     },
-    likable:{
+    likeable:{
         type: mongoose.Schema.ObjectId,
         required: true,
         refPath: 'onModel'
