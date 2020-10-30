@@ -53,6 +53,8 @@ module.exports.destroy = async(req,res)=>{
     try{
         let comment = await Comment.findById(req.params.id)
         if(comment.user == req.user.id){
+            await Like.deleteMany({likeable: comment._id, onModel: 'Comment'});
+
             let PostId = comment.post;
             comment.remove();
             let post = await Post.findByIdAndUpdate(PostId,{$pull:{comments: req.param.id}});

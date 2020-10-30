@@ -11,8 +11,11 @@ module.exports.home = async (req,res) =>{
 		path:'comments',
 		populate:{
 			path:'user'
+		},
+		populate:{
+			path:'likes'
 		}
-	})
+	}).populate('likes');
 	// .exec((err,posts)=>{
 		
 	// })

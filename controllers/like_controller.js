@@ -41,7 +41,7 @@ module.exports.toogleLike = async (req,res)=>{
                 onModel: req.query.type
             });
 
-            likeable.likes.push(like._id);
+            likeable.likes.push(newLike._id);
             likeable.save();
 
         }
